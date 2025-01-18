@@ -37,12 +37,5 @@ function calcSelectSize() {
   var nota = document.createElement("OPTION");
   nota.text = "Ingrese acción";
   sel.appendChild(nota);
-
-  // POR QUE NO FUNCIONA LA LINEA SIGUIENTE???
-  //    var sel = selectinapplication (0);
-
   widthSelect = checkSize(sel);
-
-  // AJUSTE QUE NO ENTIENDO, PERO NECESARIO
-  // widthSelect = widthSelect + 1;
 }

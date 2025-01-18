@@ -31,7 +31,7 @@ Formula.prototype.eq = Formula_eq;
 
 Formula.prototype.size = function () {
   var p = document.createCosa("SPAN", "class", "tree");
-  p.appendChild(document.createTextNode(this.toStr()));
+  p.appendChild(document.createTextNode("\\(" + this.toStr() + "\\)"));
   return checkSize(p);
 };
 
@@ -67,9 +67,6 @@ Formula.prototype.checkAridades = function () {
 // Modulo Term
 
 Term.prototype = new Arbol();
-// Term.prototype.toAscii = function () {return this.fapply (dispTAscii);};
-// Term.prototype.toStr   = function () {return this.fapply (dispT);};
-// Term.prototype.toTex   = function () {return this.fapply (dispTTex);};
 
 function Term_eq(f2) {
   if (
