@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html data-darkreader-mode="dynamic" data-darkreader-scheme="dark" data-darkreader-proxy-injected="true">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Asistente de pruebas - Proposicional</title>
+  <script type="text/javascript" src="./js/jquery-1.js"> </script>
+  <script type="text/javascript">
+    var conTipoDeSimilaridad = false;
+  </script>
+  <script type="text/javascript" src="./js/ext.js">          </script>
+  <script type="text/javascript" src="./js/tipos.js">        </script>
+  <script type="text/javascript" src="./js/globals.js">      </script>
+  <script type="text/javascript" src="./js/nombres.js">      </script>
+  <script type="text/javascript" src="./js/arbol.js">        </script>
+  <script type="text/javascript" src="./js/prop.js">         </script>
+  <script type="text/javascript" src="./js/reglas.js">       </script>
+  <script type="text/javascript" src="./js/prueba.js">       </script>
+  <script type="text/javascript" src="./js/prompts.js">      </script>
+  <script type="text/javascript" src="./js/dialogs.js">      </script>
+  <script type="text/javascript" src="./js/parseProp.js">       </script>
+  <script type="text/javascript" src="./js/selectProp.js">    </script>
+  <script type="text/javascript" src="./js/parserObj.js">    </script>
+  <script type="text/javascript" src="./js/largos.js">       </script>
+  <script type="text/javascript" src="./js/despliegue.js">   </script>
+  <link href="./js/clases.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+  <h1>YODA: Un asistente para derivaciones en PROP</h1>
+
+  <div id="top">
+    <div id="problema">
+      A probar:
+      <span id="premisas">...</span>
+      ⊢
+      <span id="conclusion">...</span>
+    </div>
+
+    <div id="prompt" style="visibility: hidden">
+      <div id="promptMsg">...</div>
+      <div id="promptSpan">...</div>
+    </div>
+  </div>
+
+
+  <div id="tree" class="tree"></div>
+  <div id="inpPremisas"></div>
+  <div id="inpConclusion"></div>
+  <div id="botonera"></div>
+
+  <script type="text/javascript"> menuDerivar(); analizaUrl(); </script>
+
+  <div class="alPie">InCo - Uruguay - 2013</div>
+
+</body>
+
+</html>

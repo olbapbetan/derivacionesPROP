@@ -1,0 +1,86 @@
+
+body {
+    font-family: sans-serif;
+    background: gray;
+}
+
+#problema { 
+    float: left; 
+    
+}
+#prompt   { 
+    visibility: hidden;
+/*    display: none; */ 
+    border-style: solid; 
+    float: right;
+    background: #A9D000;
+}
+
+#tree { 
+    clear: both; 
+    text-align: center;
+}
+
+#t3 { width: 6em; }
+#v4 { width: 3em; }
+
+*.alPie { 
+    color: black; 
+    font-style: italic; 
+    position: absolute; 
+    bottom: 0px; 
+    right: 100px; 
+}
+
+*.Hip {
+    text-decoration: line-through; 
+    color: red; 
+    font-weight: bold;
+}
+
+*.Pre {
+    color: blue; 
+    font-weight: bold;
+}
+
+
+/* COMIENZAN ESTILOS VIEJOS */
+
+letra { font-weight: bold }
+
+*.ingprompt { border-style: solid; position: absolute; top: 100px; right: 100px }
+
+
+*.tree { border-style: solid; font-family: monospace }
+
+.tree * { padding: 0px }
+
+*.siblings { display: inline-block; vertical-align: bottom }
+
+/*
+*.upper { white-space: nowrap }
+*/
+
+*.siblings table { table-layout: fixed }
+
+*.cancelada { text-align: center; text-decoration: line-through; color: red; font-weight: bold }
+*.premisa { text-align: center; color: blue; font-weight: bold }
+*.conclusion { text-align: center }
+/* *.ajustificar { text-align: center } */
+
+/* *.aplicacion3 {  } */
+*.aplicacion2 { table-layout: fixed }
+
+
+*.just { vertical-align: top; text-align: left }
+
+/*
+*.dispHtml { border-style: solid; background: blue; text-align: center}
+*.divtxt { border-style: solid; background: yellow;}
+*/
+
+/* *.selectRule { width: 124px } */
+
+/* td.pruebaOculta { padding: 0 2px } */
+
+
