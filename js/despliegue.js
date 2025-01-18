@@ -11,9 +11,24 @@ function puntosTrivial(ans, fSize) {
   ans.X = 0;
   ans.Z = ans.B + lenPad;
 }
+
+// Dibuja una hoja con su cancelación
 function cajaTrivial(f) {
-  var ans = document.createCosa("DIV", "class", f.just, "style", padLeftRight);
-  ans.appendChild(document.createTextNode(f.conclusion.toStr()));
+  var ans = document.createCosa(
+    "DIV",
+    "class",
+    f.just.startsWith("Hip-") ? "Hip" : f.just,
+    "style",
+    padLeftRight
+  );
+  const cancellingRuleIndex = f.just.startsWith("Hip-")
+    ? `^{${f.just.slice(4)}}`
+    : "";
+  ans.appendChild(
+    document.createTextNode(
+      `\\( [${f.conclusion.toStr()}]${cancellingRuleIndex} \\)`
+    )
+  );
   return ans;
 }
 
@@ -26,6 +41,8 @@ function puntosIncompleta(ans, fSize) {
   ans.X = 0;
   ans.Z = ans.E;
 }
+
+// Dibuja bloque con parte de la prueba y selector para aplicar regla
 function cajaIncompleta(f) {
   var t = document.createCosa("TABLE");
   var tr = document.createElement("TR");
@@ -103,7 +120,8 @@ function cajaCompleja(f, pt) {
     "class",
     "just",
     "style",
-    "width:" + justSize[f.just + '(00)'] + "px",
+    // largo de: nombre de regla + número cancelador
+    "width:" + justSize[f.just + "(00)"] + "px",
     "ondblclick",
     "colapsarPrueba(" + f.idx + ")"
   );
@@ -117,7 +135,6 @@ function cajaCompleja(f, pt) {
 
   // regla aplicada: nombre + número
   td3.appendChild(document.createTextNode(`${just2Str[f.just]} (${f.idx})`));
-  console.log(f)
   d.appendChild(t);
   return d;
 }
@@ -162,11 +179,17 @@ function dispPruebaHTML(f, lst) {
         ans.div.appendChild(cajaIncompleta(f));
         break;
       case "Hip":
+      // console.log(f, 'intentando cancelar hipotesis')
       case "Pre":
       case "RI1":
         puntosTrivial(ans, fSize);
         ans.div.appendChild(cajaTrivial(f));
         break;
+      default:
+        if (f.just.startsWith("Hip")) {
+          puntosTrivial(ans, fSize);
+          ans.div.appendChild(cajaTrivial(f));
+        }
     }
   } else {
     var acum3 = 0,

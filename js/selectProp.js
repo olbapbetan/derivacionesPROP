@@ -14,7 +14,6 @@ function selectinapplication(nregla) {
   var ogeli = document.createCosa("OPTGROUP", "label", "Eliminación");
   var ogpre = document.createCosa("OPTGROUP", "label", "Premisas");
   var oghip = document.createCosa("OPTGROUP", "label", "Hipótesis");
-  var ogid = document.createCosa("OPTGROUP", "label", "Identidad");
   var nota = document.createElement("OPTION");
   nota.text = "Ingrese acción";
   sel.appendChild(nota);
@@ -22,10 +21,8 @@ function selectinapplication(nregla) {
   var p = globalIdx[nregla];
   if (p !== undefined) {
     var hips = p.getHips();
-    //	var hips = p.hips;
     for (var i = 0; i < hips.length; i++) {
       var obj = createOption(hips[i][0].toStr() + " [" + hips[i][1] + "]");
-      //	    var obj = createOption (hips[i].toStr());
       oghip.appendChild(obj);
     }
 

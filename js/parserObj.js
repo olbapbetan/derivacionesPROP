@@ -136,9 +136,10 @@ function precedencia(x) {
 /////////////////////////////////////////
 /////////////// REGLAS DE INFERENCIA
 
-function appHip(hip, n) {
-  var p = globalIdx[n],
-    idx = 0;
+// Chequea que la hipótesis seleccionada esté bien aplicada para luego cancelarla
+// indexRule -> número de regla que está cancelando
+function appHip(hip, n, indexRule) {
+  var p = globalIdx[n];
   var forbidden = p.ForbiddenVars(p.conclusion);
   var exceptions = p.ExceptionForms();
   var problema = !p.conclusion.eq(hip);
@@ -152,7 +153,8 @@ function appHip(hip, n) {
       problema = problema && !p.conclusion.eq(exceptions[idx++]);
     if (problema) alert("Esta regla no está siendo aplicada correctamente.");
     else {
-      p.just = "Hip";
+      p.just = "Hip-" + indexRule;
+      console.log("aplico hipote");
       prueba2Html();
     }
   }
@@ -179,7 +181,6 @@ function derivar() {
   var p = new Prueba(conclusion);
   p.prems = premisas;
   globalIdx = [p];
-  //    globalIdx = [new Prueba (conclusion)];
   prueba2Html();
   dPrems.but.disabled = true;
   dConc.but.disabled = true;
@@ -235,23 +236,24 @@ function createOption(txt) {
   return obj;
 }
 
-//NUEVA 19.3.2011
+// Chequea elemento seleccionado de 'select'
 function applyRule(select, nregla) {
   var hips = globalIdx[nregla].getHips();
-  //    var hips = globalIdx [nregla].hips;
-  //    var prems = globalIdx [nregla].prems;
   var index = select.selectedIndex;
 
   if (premisas.length > 0 && index - 1 < premisas.length)
     appPremisa(index - 1, nregla);
   else if (hips.length > 0 && index - premisas.length <= hips.length)
-    //	appHip (hips [index - premisas.length - 1],nregla)
-    appHip(hips[index - premisas.length - 1][0], nregla);
+    appHip(
+      hips[index - premisas.length - 1][0],
+      nregla,
+      hips[index - premisas.length - 1][1]
+    );
   else {
     var nombreRegla = select.options[select.selectedIndex].text;
     applyrule(nm2Rule[nombreRegla], nregla);
   }
-  //reinicio la opcion por defecto
+  // reinicio la opcion por defecto
   select[0].selected = "1";
 }
 
@@ -308,7 +310,7 @@ function setConclusion(fmltxt) {
   var parent = document.getElementById("conclusion");
   var ans;
   if (conclusion !== null) {
-    ans = conclusion.toStr();
+    ans = "\\(" + conclusion.toStr() + "\\)";
     dBoton.derivar.disabled = false;
   } else {
     ans = "???";
@@ -324,6 +326,7 @@ function resetConclusion() {
   parent.replaceChild(document.createTextNode(ans), parent.firstChild);
 }
 
+// Escribe las hipótesis globales escritas en el input
 function setPremisas(fmltxt) {
   premisas = [];
   var ans = "",
@@ -337,19 +340,18 @@ function setPremisas(fmltxt) {
       newf = parse(premisasTxt[idx++], parsePrincipal);
     if (newf !== null) {
       premisas.push(newf);
-      ans = newf.toStr();
+      ans = "\\(" + newf.toStr();
       while (idx < premisasTxt.length) {
         newf = parse(premisasTxt[idx], parsePrincipal);
         if (newf !== null) {
           premisas.push(newf);
-          ans += ";" + newf.toStr();
+          ans += "," + newf.toStr() + ")";
         }
         idx++;
       }
+      ans += "\\)";
     }
   }
-
-  //    if (newf === null) { ans = "???"; premisas = []; }
 
   var parent = document.getElementById("premisas");
   parent.replaceChild(document.createTextNode(ans), parent.firstChild);
