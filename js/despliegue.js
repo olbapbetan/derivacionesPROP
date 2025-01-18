@@ -33,7 +33,7 @@ function cajaIncompleta(f) {
   var td2 = document.createElement("TD");
   td1.appendChildren(
     document.createElement("HR"),
-    document.createTextNode(f.conclusion.toStr())
+    document.createTextNode("\\(" + f.conclusion.toStr() + "\\)")
   );
   td2.appendChild(selectinapplication(f.idx));
   tr.appendChildren(td1, td2);
@@ -103,7 +103,7 @@ function cajaCompleja(f, pt) {
     "class",
     "just",
     "style",
-    "width:" + justSize[f.just] + "px",
+    "width:" + justSize[f.just + '(00)'] + "px",
     "ondblclick",
     "colapsarPrueba(" + f.idx + ")"
   );
@@ -114,7 +114,10 @@ function cajaCompleja(f, pt) {
   td1.appendChild(
     document.createCosa("HR", "style", "width:" + (pt.D - pt.C) + "px")
   );
-  td3.appendChild(document.createTextNode(just2Str[f.just]));
+
+  // regla aplicada: nombre + número
+  td3.appendChild(document.createTextNode(`${just2Str[f.just]} (${f.idx})`));
+  console.log(f)
   d.appendChild(t);
   return d;
 }
