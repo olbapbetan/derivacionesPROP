@@ -98,8 +98,9 @@ R_ThenE.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
     pINP1,
-    document.createTextNode(tk2Char["lthen"]),
-    document.createTextNode(this.prueba.conclusion.toStr()),
+    document.createTextNode(
+      "\\( \\to " + this.prueba.conclusion.toStr() + "\\)"
+    ),
   ]);
   pINP1.focus();
 };
@@ -111,7 +112,7 @@ R_ThenE.post = function (n) {
   if (newf !== null) {
     var sp1 = new Prueba(newf.hijos[0]);
     var sp2 = new Prueba(newf);
-    R_ThenE.prueba.colgarHijos(sp1, sp2);
+    R_ThenE.prueba.colgarHijos(sp2, sp1);
     R_ThenE.prueba.just = "lthenE";
   }
   prueba2Html();
@@ -169,10 +170,10 @@ R_IffI.aplicable = function () {
 };
 R_IffI.MSGnoaplicable = "Estrategia inadecuada: observe el conector principal.";
 R_IffI.post = function (n) {
-  var sp1 = new Prueba(this.prueba.conclusion.hijos[0]);
-  var sp2 = new Prueba(this.prueba.conclusion.hijos[1]);
-  sp1.hips = [this.prueba.conclusion.hijos[1]];
-  sp2.hips = [this.prueba.conclusion.hijos[0]];
+  var sp1 = new Prueba(this.prueba.conclusion.hijos[1]);
+  var sp2 = new Prueba(this.prueba.conclusion.hijos[0]);
+  sp1.hips = [this.prueba.conclusion.hijos[0]];
+  sp2.hips = [this.prueba.conclusion.hijos[1]];
   this.prueba.colgarHijos(sp1, sp2);
   this.prueba.just = "liffI";
   prueba2Html();
@@ -255,7 +256,7 @@ R_NegE.post = function (n) {
   if (newf !== null) {
     var sp1 = new Prueba(newf.hijos[0]);
     var sp2 = new Prueba(newf);
-    R_NegE.prueba.colgarHijos(sp1, sp2);
+    R_NegE.prueba.colgarHijos(sp2, sp1);
     R_NegE.prueba.just = "lnotE";
   }
   prueba2Html();
