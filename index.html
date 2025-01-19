@@ -42,14 +42,21 @@
       <div id="promptSpan">...</div>
     </div>
   </div>
-
+  <br>
+  <div style="margin-top: 20px;">
+    <div id="inpPremisas"></div>
+    <div id="inpConclusion"></div>
+    <div id="botonera"></div>
+  </div>
 
   <div id="tree" class="tree"></div>
-  <div id="inpPremisas"></div>
-  <div id="inpConclusion"></div>
-  <div id="botonera"></div>
 
   <script type="text/javascript"> menuDerivar(); analizaUrl(); </script>
 </body>
+<script>
+  const reloadLaTeX = () => {
+    MathJax.typeset();
+  }
+</script>
 
 </html>

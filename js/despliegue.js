@@ -111,7 +111,8 @@ function cajaCompleja(f, pt) {
   var td2 = document.createCosa(
     "TD",
     "style",
-    "padding-left:" + pt.A + "px",
+    //"padding-left:" + pt.A + "px",
+    "text-align: center;",
     "ondblclick",
     "deshacerPrueba(" + f.idx + ")"
   );
@@ -128,7 +129,7 @@ function cajaCompleja(f, pt) {
   t.appendChildren(tr1, tr2);
   tr1.appendChildren(td1, td3);
   tr2.appendChild(td2);
-  td2.appendChild(document.createTextNode(f.conclusion.toStr()));
+  td2.appendChild(document.createTextNode(`\\( ${f.conclusion.toStr()} \\)`));
   td1.appendChild(
     document.createCosa("HR", "style", "width:" + (pt.D - pt.C) + "px")
   );
@@ -179,7 +180,7 @@ function dispPruebaHTML(f, lst) {
         ans.div.appendChild(cajaIncompleta(f));
         break;
       case "Hip":
-      // console.log(f, 'intentando cancelar hipotesis')
+      // intentando cancelar hipotesis
       case "Pre":
       case "RI1":
         puntosTrivial(ans, fSize);
@@ -212,7 +213,8 @@ function dispPruebaHTML(f, lst) {
       "class",
       "upper",
       "style",
-      "padding-left:" + lst[0].X + "px"
+      "padding-left:" + lst[0].X + "px",
+      "padding-right: 50px"
     );
     for (i = 0; i < lst.length; i++) {
       upper.appendChild(lst[i].div);

@@ -1,7 +1,6 @@
 /////////////////
 // Arboles
 function Arbol() {
-  // data)
   this.padre = {};
   this.hijos = [];
 }

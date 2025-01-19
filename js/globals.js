@@ -40,11 +40,7 @@ var nm2Rule = {};
 var globalIdx = [];
 var premisas = [];
 var conclusion;
-var hipotesisId = 0
-const getHypothesisId = () => {
-  hipotesisId += 1;
-  return hipotesisId - 1;
-}
+var hipotesisCanceladas = new Set();
 
 //////////////////////////////////
 // Reglas a usar
