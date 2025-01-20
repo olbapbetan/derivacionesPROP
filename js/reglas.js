@@ -37,7 +37,7 @@ R_AndE1.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
     document.createTextNode(this.prueba.conclusion.toStr()),
-    document.createTextNode(tk2Char["land"]),
+    document.createTextNode(`\\( ${tk2Char["land"]} \\) `),
     pINP1,
   ]);
   pINP1.focus();
@@ -61,7 +61,7 @@ R_AndE2.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
     pINP1,
-    document.createTextNode(tk2Char["land"]),
+    document.createTextNode(`\\( ${tk2Char["land"]} \\) `),
     document.createTextNode(this.prueba.conclusion.toStr()),
   ]);
   pINP1.focus();
@@ -144,7 +144,7 @@ R_OrI2.post = function (dummy) {
 R_OrE.conPrompt = true;
 R_OrE.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
-  pFORM.set(msg1, [pINP1, document.createTextNode(tk2Char["lor"]), pINP2]);
+  pFORM.set(msg1, [pINP1, document.createTextNode(`\\( ${tk2Char["lor"]} \\) `), pINP2]);
   pINP1.focus();
 };
 R_OrE.post = function (n) {
@@ -184,7 +184,7 @@ R_IffE1.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
     pINP1,
-    document.createTextNode(tk2Char["liff"]),
+    document.createTextNode(`\\( ${tk2Char["liff"]} \\)`),
     document.createTextNode(this.prueba.conclusion.toStr()),
   ]);
   pINP1.focus();
@@ -209,7 +209,7 @@ R_IffE2.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
     document.createTextNode(this.prueba.conclusion.toStr()),
-    document.createTextNode(tk2Char["liff"]),
+    document.createTextNode(`\\( ${tk2Char["liff"]} \\)`),
     pINP1,
   ]);
   pINP1.focus();
@@ -248,7 +248,11 @@ R_NegE.MSGnoaplicable = "Estrategia inadecuada: observe el conector principal.";
 R_NegE.conPrompt = true;
 R_NegE.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
-  pFORM.set(msg1, [document.createTextNode(tk2Char["lnot"]), pINP1]);
+  pFORM.set(msg1, [
+    document.createTextNode(`\\( ${tk2Char["lnot"]} \\) `),
+    pINP1,
+  ]);
+  reloadLaTeX();
   pINP1.focus();
 };
 R_NegE.post = function (n) {

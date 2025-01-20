@@ -26,7 +26,9 @@ function cajaTrivial(f) {
     : "";
   ans.appendChild(
     document.createTextNode(
-      `\\( [${f.conclusion.toStr()}]${cancellingRuleIndex} \\)`
+      `\\( [${convertGreekToLaTeX(
+        f.conclusion.toStr()
+      )}]${cancellingRuleIndex} \\)`
     )
   );
   return ans;
@@ -50,7 +52,9 @@ function cajaIncompleta(f) {
   var td2 = document.createElement("TD");
   td1.appendChildren(
     document.createElement("HR"),
-    document.createTextNode("\\(" + f.conclusion.toStr() + "\\)")
+    document.createTextNode(
+      "\\(" + convertGreekToLaTeX(f.conclusion.toStr()) + "\\)"
+    )
   );
   td2.appendChild(selectinapplication(f.idx));
   tr.appendChildren(td1, td2);
@@ -129,7 +133,11 @@ function cajaCompleja(f, pt) {
   t.appendChildren(tr1, tr2);
   tr1.appendChildren(td1, td3);
   tr2.appendChild(td2);
-  td2.appendChild(document.createTextNode(`\\( ${f.conclusion.toStr()} \\)`));
+  td2.appendChild(
+    document.createTextNode(
+      `\\( ${convertGreekToLaTeX(f.conclusion.toStr())} \\)`
+    )
+  );
   td1.appendChild(
     document.createCosa("HR", "style", "width:" + (pt.D - pt.C) + "px")
   );
