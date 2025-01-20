@@ -1,4 +1,4 @@
-// Lógica de la ventana que muestra código LaTeX
+// Lógica de la ventana que muestra el código LaTeX exportado
 function texExport(tree_id) {
   latexCode = "$$ " + globalIdx[tree_id].disp() + " $$";
 
@@ -391,7 +391,7 @@ function setPremisas(fmltxt) {
         newf = parse(premisasTxt[idx], parsePrincipal);
         if (newf !== null) {
           premisas.push(newf);
-          ans += "," + convertGreekToLaTeX(newf.toStr()) + ")";
+          ans += ",\\quad" + convertGreekToLaTeX(newf.toStr());
         }
         idx++;
       }
