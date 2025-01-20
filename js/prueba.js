@@ -39,29 +39,35 @@ function Prueba_ExceptionForms() {
 }
 Prueba.prototype.ExceptionForms = Prueba_ExceptionForms;
 
+// Utilizado para exportar a LaTeX
 function Prueba_disp(node, lst) {
   var concl = node.conclusion.toTex();
   switch (node.just) {
     case "Pre":
       return concl;
-    case "Hip":
+    case "Hip": // no funciona más
       return "[" + concl + "]";
     case "?":
       return "\\infer*[???]" + "\n {" + concl + "}" + "\n {???}";
     default:
-      return (
-        "\\infer[" +
-        just2Tex[node.just] +
-        "]" +
-        "\n {" +
-        concl +
-        "}" +
-        "\n {" +
-        "&".intersperse(lst) +
-        "}"
-      );
+      if (node.just.startsWith("Hip-")) {
+        hipotesisCanceladas.add(`(${node.just.slice(4)})`);
+
+        return `[${concl}]^{${node.just.slice(4)}}`;
+      } else {
+        return (
+          `\\infer[${just2Tex[node.just]} (${node.idx})]` +
+          "\n {" +
+          concl +
+          "}" +
+          "\n {" +
+          " & ".intersperse(lst) + // acá se hace la recursión
+          "}"
+        );
+      }
   }
 }
+
 Prueba.prototype.disp = function () {
   return this.fapply(Prueba_disp);
 };

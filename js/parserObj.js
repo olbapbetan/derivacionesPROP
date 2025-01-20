@@ -1,5 +1,43 @@
+// Lógica de la ventana que muestra código LaTeX
 function texExport(tree_id) {
   latexCode = "$$ " + globalIdx[tree_id].disp() + " $$";
+
+  // remuevo números de reglas no aplicadas
+  const regex = /\(\d+\)/gm;
+  let aux;
+  while ((aux = regex.exec(latexCode)) !== null) {
+    aux.forEach((match) => {
+      // si la hipótesis no está cancelada, la elimino del código LaTeX
+      if (!hipotesisCanceladas.has(match)) {
+        latexCode = latexCode.replaceAll(` ${match}`, "");
+      }
+    });
+  }
+
+  // corrigiendo los índices canceladores para que:
+  // 1. sean consecutivos
+  // 2. comiencen en 1
+  let indicesCanceladores = [""];
+  while ((aux = regex.exec(latexCode)) !== null) {
+    aux.forEach((match) => {
+      indicesCanceladores.push(match.slice(1, -1));
+    });
+  }
+  for (i of indicesCanceladores) {
+    latexCode = latexCode.replaceAll(`(${i})`, `_(${i})_`);
+    latexCode = latexCode.replaceAll(`{${i}}`, `_{${i}}_`);
+  }
+  for (i in indicesCanceladores) {
+    latexCode = latexCode.replaceAll(
+      `_(${indicesCanceladores[i]})_`,
+      `\\;(${i})`
+    );
+    latexCode = latexCode.replaceAll(`_{${indicesCanceladores[i]}}_`, `{${i}}`);
+  }
+
+  latexCode = convertGreekToLaTeX(latexCode);
+
+  // abro ventana
   popUp = window.open("", "", "width=400,height=200,titlebar=no");
   popUp.document.write(
     "<div style='font-family: courier new; font-size:small;'>" +
@@ -154,7 +192,6 @@ function appHip(hip, n, indexRule) {
     if (problema) alert("Esta regla no está siendo aplicada correctamente.");
     else {
       p.just = "Hip-" + indexRule;
-      console.log("aplico hipote");
       prueba2Html();
     }
   }
@@ -191,6 +228,7 @@ function derivar() {
 function reset() {
   resetConclusion();
   resetPremisas();
+  hipotesisCanceladas = new Set();
   dPrems.but.disabled = false;
   dConc.but.disabled = false;
   pFORM.form.off();
@@ -208,6 +246,7 @@ function prueba2Html() {
   var t = globalIdx[0].fapply(dispPruebaHTML);
   if (div.firstChild !== null) div.replaceChild(t.div, div.firstChild);
   else div.appendChild(t.div);
+  reloadLaTeX();
   return;
 }
 
@@ -219,7 +258,13 @@ function colapsarPrueba(fidx) {
 }
 
 function deshacerPrueba(n) {
-  if (confirm("¿Confirma que desea deshacer esta (sub)prueba?")) {
+  if (
+    confirm(
+      "¿Confirma que desea deshacer esta (sub)prueba?" +
+        "\n\nEsto puede romper los índices canceladores."
+    )
+  ) {
+    // FIXME
     var p = globalIdx[n];
     p.just = "?";
     p.visible = true;
@@ -310,13 +355,14 @@ function setConclusion(fmltxt) {
   var parent = document.getElementById("conclusion");
   var ans;
   if (conclusion !== null) {
-    ans = "\\(" + conclusion.toStr() + "\\)";
+    ans = "\\(" + convertGreekToLaTeX(conclusion.toStr()) + "\\)";
     dBoton.derivar.disabled = false;
   } else {
     ans = "???";
     dBoton.derivar.disabled = true;
   }
   parent.replaceChild(document.createTextNode(ans), parent.firstChild);
+  reloadLaTeX();
 }
 
 function resetConclusion() {
@@ -340,12 +386,12 @@ function setPremisas(fmltxt) {
       newf = parse(premisasTxt[idx++], parsePrincipal);
     if (newf !== null) {
       premisas.push(newf);
-      ans = "\\(" + newf.toStr();
+      ans = "\\(" + convertGreekToLaTeX(newf.toStr());
       while (idx < premisasTxt.length) {
         newf = parse(premisasTxt[idx], parsePrincipal);
         if (newf !== null) {
           premisas.push(newf);
-          ans += "," + newf.toStr() + ")";
+          ans += "," + convertGreekToLaTeX(newf.toStr()) + ")";
         }
         idx++;
       }
@@ -355,6 +401,7 @@ function setPremisas(fmltxt) {
 
   var parent = document.getElementById("premisas");
   parent.replaceChild(document.createTextNode(ans), parent.firstChild);
+  reloadLaTeX();
 }
 
 function resetPremisas() {
