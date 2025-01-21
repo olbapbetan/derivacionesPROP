@@ -1,4 +1,4 @@
-var msg1 = "Complete la fórmula a eliminar";
+var msg1 = "Complete la fórmula a eliminar:";
 
 /////////////////
 // Utilitaria
@@ -36,10 +36,11 @@ R_AndE1.conPrompt = true;
 R_AndE1.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
-    document.createTextNode(this.prueba.conclusion.toStr()),
-    document.createTextNode(`\\( ${tk2Char["land"]} \\) `),
+    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
+    document.createTextNode(` \\( ${tk2Char["land"]} \\) `),
     pINP1,
   ]);
+  reloadLaTeX();
   pINP1.focus();
 };
 R_AndE1.post = function (dummy) {
@@ -61,9 +62,10 @@ R_AndE2.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
     pINP1,
-    document.createTextNode(`\\( ${tk2Char["land"]} \\) `),
-    document.createTextNode(this.prueba.conclusion.toStr()),
+    document.createTextNode(` \\( ${tk2Char["land"]} \\) `),
+    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
   ]);
+  reloadLaTeX();
   pINP1.focus();
 };
 R_AndE2.post = function (dummy) {
@@ -99,9 +101,10 @@ R_ThenE.prompt = function (n) {
   pFORM.set(msg1, [
     pINP1,
     document.createTextNode(
-      "\\( \\to " + this.prueba.conclusion.toStr() + "\\)"
+      ` \\( \\to ${this.prueba.conclusion.toStr()} \\)`
     ),
   ]);
+  reloadLaTeX();
   pINP1.focus();
 };
 R_ThenE.post = function (n) {
@@ -144,7 +147,8 @@ R_OrI2.post = function (dummy) {
 R_OrE.conPrompt = true;
 R_OrE.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
-  pFORM.set(msg1, [pINP1, document.createTextNode(`\\( ${tk2Char["lor"]} \\) `), pINP2]);
+  pFORM.set(msg1, [pINP1, document.createTextNode(` \\( ${tk2Char["lor"]} \\) `), pINP2]);
+  reloadLaTeX();
   pINP1.focus();
 };
 R_OrE.post = function (n) {
@@ -184,9 +188,10 @@ R_IffE1.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
     pINP1,
-    document.createTextNode(`\\( ${tk2Char["liff"]} \\)`),
-    document.createTextNode(this.prueba.conclusion.toStr()),
+    document.createTextNode(` \\( ${tk2Char["liff"]} \\) `),
+    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
   ]);
+  reloadLaTeX();
   pINP1.focus();
 };
 R_IffE1.post = function (n) {
@@ -208,10 +213,11 @@ R_IffE2.conPrompt = true;
 R_IffE2.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
-    document.createTextNode(this.prueba.conclusion.toStr()),
-    document.createTextNode(`\\( ${tk2Char["liff"]} \\)`),
+    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
+    document.createTextNode(` \\( ${tk2Char["liff"]} \\) `),
     pINP1,
   ]);
+  reloadLaTeX();
   pINP1.focus();
 };
 R_IffE2.post = function (n) {
@@ -249,7 +255,7 @@ R_NegE.conPrompt = true;
 R_NegE.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
-    document.createTextNode(`\\( ${tk2Char["lnot"]} \\) `),
+    document.createTextNode(` \\( ${tk2Char["lnot"]} \\) `),
     pINP1,
   ]);
   reloadLaTeX();
