@@ -36,7 +36,9 @@ R_AndE1.conPrompt = true;
 R_AndE1.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
-    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
+    document.createTextNode(
+      `\\( ${convertGreekToLaTeX(this.prueba.conclusion.toStr())} \\)`
+    ),
     document.createTextNode(` \\( ${tk2Char["land"]} \\) `),
     pINP1,
   ]);
@@ -63,7 +65,9 @@ R_AndE2.prompt = function (n) {
   pFORM.set(msg1, [
     pINP1,
     document.createTextNode(` \\( ${tk2Char["land"]} \\) `),
-    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
+    document.createTextNode(
+      `\\( ${convertGreekToLaTeX(this.prueba.conclusion.toStr())} \\)`
+    ),
   ]);
   reloadLaTeX();
   pINP1.focus();
@@ -101,7 +105,7 @@ R_ThenE.prompt = function (n) {
   pFORM.set(msg1, [
     pINP1,
     document.createTextNode(
-      ` \\( \\to ${this.prueba.conclusion.toStr()} \\)`
+      ` \\( \\to ${convertGreekToLaTeX(this.prueba.conclusion.toStr())} \\)`
     ),
   ]);
   reloadLaTeX();
@@ -147,7 +151,11 @@ R_OrI2.post = function (dummy) {
 R_OrE.conPrompt = true;
 R_OrE.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
-  pFORM.set(msg1, [pINP1, document.createTextNode(` \\( ${tk2Char["lor"]} \\) `), pINP2]);
+  pFORM.set(msg1, [
+    pINP1,
+    document.createTextNode(` \\( ${tk2Char["lor"]} \\) `),
+    pINP2,
+  ]);
   reloadLaTeX();
   pINP1.focus();
 };
@@ -189,7 +197,9 @@ R_IffE1.prompt = function (n) {
   pFORM.set(msg1, [
     pINP1,
     document.createTextNode(` \\( ${tk2Char["liff"]} \\) `),
-    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
+    document.createTextNode(
+      `\\( ${convertGreekToLaTeX(this.prueba.conclusion.toStr())} \\)`
+    ),
   ]);
   reloadLaTeX();
   pINP1.focus();
@@ -213,7 +223,9 @@ R_IffE2.conPrompt = true;
 R_IffE2.prompt = function (n) {
   pFORM.bOK.onclick = pFORM.F(this.post, n);
   pFORM.set(msg1, [
-    document.createTextNode(`\\( ${this.prueba.conclusion.toStr()} \\)`),
+    document.createTextNode(
+      `\\( ${convertGreekToLaTeX(this.prueba.conclusion.toStr())} \\)`
+    ),
     document.createTextNode(` \\( ${tk2Char["liff"]} \\) `),
     pINP1,
   ]);
