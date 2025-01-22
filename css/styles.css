@@ -21,11 +21,15 @@ hr {
   background-color: white;
 }
 
-#tree {
+.tree {
   margin-top: 50px;
   clear: both;
   text-align: center;
   padding: 30px;
+  overflow-x: auto;
+  border-style: solid;
+  border-radius: 5px;
+  font-family: monospace;
 }
 
 #t3 {
@@ -66,16 +70,6 @@ letra {
   position: absolute;
   top: 100px;
   right: 100px;
-}
-
-*.tree {
-  border-style: solid;
-  border-radius: 5px;
-  font-family: monospace;
-}
-
-.tree * {
-  padding: 0px;
 }
 
 *.siblings {
