@@ -4,6 +4,10 @@ body {
   padding: 5% 20% 5% 20%;
 }
 
+.footer {
+  padding-top: 50px;
+}
+
 hr {
   border: 1px solid black;
 }
