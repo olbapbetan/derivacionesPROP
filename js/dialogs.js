@@ -80,7 +80,7 @@ dBoton.help = document.createCosa(
   "id",
   "btnHelp",
   "onclick",
-  "window.open ('manProp.txt')"
+  "alert('TBD')"
 );
 dBoton.help.appendChild(document.createTextNode("Ayuda"));
 dBoton.toTex = document.createCosa(
